@@ -23,7 +23,7 @@ const cssEntries = [
         dest: 'ui/options/style.css',
     },
     {
-        src: 'src/ui/popup/style.less',
+        src: 'src/ui/nocturne/popup/style.less',
         dest: 'ui/popup/style.css',
     },
     {

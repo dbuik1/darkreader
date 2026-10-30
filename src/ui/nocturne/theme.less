@@ -1,0 +1,124 @@
+// Every text colour clears 7:1 against both --bg and --surface in its theme;
+// borders and the focus ring clear 3:1 against both.
+:root {
+    color-scheme: dark;
+    --bg: #111418;
+    --surface: #1b2026;
+    --surface-raised: #232a31;
+    --text: #eef1f4;
+    --text-muted: #b3bcc6;
+    --accent: #8fd3e8;
+    --on-accent: #0b1a20;
+    --border: #7d8894;
+    --track-off: #4a545f;
+    --focus: #ffd166;
+    --callout-bg: #2a2412;
+    --callout-border: #c9a64b;
+
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+    --text-base: 1rem;
+    --text-small: 0.875rem;
+    --text-large: 1.25rem;
+    --leading: 1.4;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+
+    --target: 2.75rem;
+    --radius: 0.5rem;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration: 160ms;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --surface: #f3f5f7;
+        --surface-raised: #e8ecf0;
+        --text: #14181c;
+        --text-muted: #454f5a;
+        --accent: #00566b;
+        --on-accent: #ffffff;
+        --border: #6b7681;
+        --track-off: #6b7681;
+        --focus: #9a4d00;
+        --callout-bg: #fff6dc;
+        --callout-border: #8a6a00;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --text-muted: var(--text);
+        --border: var(--text);
+        --track-off: var(--text);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 100%;
+    line-height: var(--leading);
+    -webkit-text-size-adjust: 100%;
+}
+
+// Chrome's extension page stylesheet sets body to 75% and its own font stack.
+body {
+    background: var(--bg);
+    font-family: var(--font);
+    font-size: var(--text-base);
+    margin: 0;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+        text-decoration-thickness: 2px;
+    }
+}
+
+:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    border: 0;
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
