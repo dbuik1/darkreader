@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebGL canvas</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav><a href="index.html">All test pages</a></nav>
+<h1>WebGL canvas</h1>
+<div class="expect">Expected: dark background with the coloured triangles still distinct. Its pixels can't be read back, so this tests the size-and-position fallback.</div>
+<canvas id="gl" width="800" height="450"></canvas>
+<script>
+const gl = document.getElementById("gl").getContext("webgl");
+const vs = "attribute vec2 p; attribute vec3 c; varying vec3 v; void main(){ v=c; gl_Position=vec4(p,0,1); }";
+const fs = "precision mediump float; varying vec3 v; void main(){ gl_FragColor=vec4(v,1); }";
+function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+const prog = gl.createProgram();
+gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+gl.linkProgram(prog); gl.useProgram(prog);
+const data = new Float32Array([
+  -0.8,-0.6, 0.15,0.39,0.92,  -0.4,0.6, 0.15,0.39,0.92,  0.0,-0.6, 0.15,0.39,0.92,
+   0.0,-0.6, 0.86,0.15,0.15,   0.4,0.6, 0.86,0.15,0.15,  0.8,-0.6, 0.86,0.15,0.15]);
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+const p = gl.getAttribLocation(prog, "p"), c = gl.getAttribLocation(prog, "c");
+gl.enableVertexAttribArray(p); gl.vertexAttribPointer(p, 2, gl.FLOAT, false, 20, 0);
+gl.enableVertexAttribArray(c); gl.vertexAttribPointer(c, 3, gl.FLOAT, false, 20, 8);
+gl.clearColor(0.98, 0.98, 0.97, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+gl.drawArrays(gl.TRIANGLES, 0, 6);
+</script>
+</body></html>
