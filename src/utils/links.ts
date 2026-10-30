@@ -44,3 +44,6 @@ export function getHelpURL(): string {
 export function getBlogPostURL(postId: string): string {
     return `${BLOG_URL}${postId}/`;
 }
+
+export const FORK_URL = 'https://github.com/dbuik1/darkreader';
+export const UPSTREAM_LICENSE_URL = 'https://github.com/darkreader/darkreader/blob/main/LICENSE';

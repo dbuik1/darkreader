@@ -1,7 +1,7 @@
 import {m} from 'malevic';
 
 import type {ViewProps} from '../../../definitions';
-import {DONATE_URL, HELP_URL, HOMEPAGE_URL, MOBILE_URL, PRIVACY_URL, getHelpURL} from '../../../utils/links';
+import {DONATE_URL, GITHUB_URL, HELP_URL, HOMEPAGE_URL, MOBILE_URL, PRIVACY_URL, UPSTREAM_LICENSE_URL, getHelpURL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
 import {isMobile} from '../../../utils/platform';
 
@@ -14,6 +14,12 @@ interface AboutTabProps {
 export function AboutTab(props: ViewProps & AboutTabProps): Malevic.Child {
     return <div class="settings-tab about-tab">
         <AppVersion />
+        <p class="about-tab__credit">
+            {getLocalMessage('based_on')}{' '}
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">Dark Reader</a>
+            {' '}{getLocalMessage('based_on_authors')}{' '}
+            <a href={UPSTREAM_LICENSE_URL} target="_blank" rel="noopener noreferrer">{getLocalMessage('mit_license')}</a>
+        </p>
         <div>
             <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 Privacy Policy

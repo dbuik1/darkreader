@@ -2,7 +2,7 @@ import {m} from 'malevic';
 import {getContext} from 'malevic/dom';
 
 import type {ViewProps} from '../../../definitions';
-import {DONATE_URL, HOMEPAGE_URL} from '../../../utils/links';
+import {DONATE_URL, FORK_URL} from '../../../utils/links';
 import {isMobile} from '../../../utils/platform';
 import {Overlay} from '../../controls';
 import {openExtensionPage} from '../../utils';
@@ -18,11 +18,11 @@ function Logo() {
     return (
         <a
             class="m-logo"
-            href={HOMEPAGE_URL}
+            href={FORK_URL}
             target="_blank"
             rel="noopener noreferrer"
         >
-            Dark Reader
+            Nocturne
         </a>
     );
 }
