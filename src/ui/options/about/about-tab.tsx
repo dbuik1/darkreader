@@ -15,10 +15,7 @@ export function AboutTab(props: ViewProps & AboutTabProps): Malevic.Child {
     return <div class="settings-tab about-tab">
         <AppVersion />
         <p class="about-tab__credit">
-            {getLocalMessage('based_on')}{' '}
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">Dark Reader</a>
-            {' '}{getLocalMessage('based_on_authors')}{' '}
-            <a href={UPSTREAM_LICENSE_URL} target="_blank" rel="noopener noreferrer">{getLocalMessage('mit_license')}</a>
+            Based on <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">Dark Reader</a> by Alexander Shutau and Dark Reader Ltd., used under the <a href={UPSTREAM_LICENSE_URL} target="_blank" rel="noopener noreferrer">MIT License</a>.
         </p>
         <div>
             <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
