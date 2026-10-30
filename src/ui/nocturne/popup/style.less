@@ -1,4 +1,5 @@
 @import '../theme.less';
+@import '../controls.less';
 
 body {
     display: flex;
@@ -47,198 +48,12 @@ body {
     padding: var(--space-4);
 }
 
-.n-callout {
-    background: var(--callout-bg);
-    border: 1px solid var(--callout-border);
-    border-radius: var(--radius);
-    font-size: var(--text-small);
-    margin: 0 0 var(--space-2);
-    padding: var(--space-2) var(--space-3);
-}
-
-.n-status {
-    color: var(--text-muted);
-    font-size: var(--text-small);
-    margin: 0;
-    min-height: 1.4em;
-
-    &:empty {
-        min-height: 0;
-    }
-}
-
 .n-secondary {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
 }
 
-// Switch: the real checkbox covers the whole row so the full label is the target.
-.n-switch {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    gap: var(--space-3);
-    justify-content: space-between;
-    min-height: var(--target);
-    position: relative;
-
-    &__text {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-    }
-
-    &__label {
-        overflow-wrap: break-word;
-        word-break: break-word;
-    }
-
-    &__hint {
-        color: var(--text-muted);
-        font-size: var(--text-small);
-    }
-
-    &__input {
-        appearance: none;
-        cursor: inherit;
-        height: 100%;
-        inset: 0;
-        margin: 0;
-        opacity: 0;
-        position: absolute;
-        width: 100%;
-    }
-
-    &__track {
-        background: var(--track-off);
-        border: 2px solid var(--border);
-        border-radius: 999px;
-        flex: none;
-        height: 1.75rem;
-        position: relative;
-        transition: background-color var(--duration) var(--ease);
-        width: 3rem;
-    }
-
-    &__thumb {
-        background: var(--text);
-        border-radius: 50%;
-        height: 1.25rem;
-        left: 0.125rem;
-        position: absolute;
-        top: 0.125rem;
-        transition: transform var(--duration) var(--ease);
-        width: 1.25rem;
-    }
-
-    &__input:checked + &__track {
-        background: var(--accent);
-        border-color: var(--accent);
-    }
-
-    &__input:checked + &__track &__thumb {
-        background: var(--on-accent);
-        transform: translateX(1.25rem);
-    }
-
-    &__input:focus-visible + &__track {
-        outline: 3px solid var(--focus);
-        outline-offset: 2px;
-    }
-
-    &--large {
-        font-size: var(--text-large);
-        font-weight: 600;
-        line-height: 1.25;
-    }
-
-    &--large &__track {
-        height: 2rem;
-        width: 3.5rem;
-    }
-
-    &--large &__thumb {
-        height: 1.5rem;
-        width: 1.5rem;
-    }
-
-    &--large &__input:checked + &__track &__thumb {
-        transform: translateX(1.5rem);
-    }
-
-    &--disabled {
-        cursor: not-allowed;
-    }
-
-    &--disabled &__input + &__track {
-        background: transparent;
-        border-color: var(--border);
-        border-style: dashed;
-    }
-
-    &--disabled &__input + &__track &__thumb {
-        background: var(--text-muted);
-    }
-}
-
-.n-choice {
-    align-items: center;
-    border: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    justify-content: space-between;
-    margin: 0;
-    min-height: var(--target);
-    padding: 0;
-
-    &__legend {
-        float: left;
-        padding: 0;
-    }
-
-    &__options {
-        border: 2px solid var(--border);
-        border-radius: var(--radius);
-        display: flex;
-        padding: 2px;
-    }
-
-    &__option {
-        cursor: pointer;
-        position: relative;
-    }
-
-    &__input {
-        appearance: none;
-        cursor: inherit;
-        inset: 0;
-        margin: 0;
-        position: absolute;
-    }
-
-    &__text {
-        align-items: center;
-        border-radius: calc(var(--radius) - 3px);
-        display: flex;
-        justify-content: center;
-        min-height: var(--target);
-        min-width: 4.5rem;
-        padding: 0 var(--space-3);
-    }
-
-    &__input:checked + &__text {
-        background: var(--accent);
-        color: var(--on-accent);
-        font-weight: 600;
-    }
-
-    &__input:focus-visible + &__text {
-        outline: 3px solid var(--focus);
-        outline-offset: 2px;
-    }
-}
 
 .n-disclosure {
     border-top: 1px solid var(--border);
@@ -279,41 +94,6 @@ body {
     }
 }
 
-.n-range {
-    align-items: center;
-    display: grid;
-    gap: var(--space-1) var(--space-2);
-    grid-template-columns: 1fr auto;
-
-    &__value {
-        color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-    }
-
-    &__input {
-        accent-color: var(--accent);
-        grid-column: ~"1 / -1";
-        height: var(--target);
-        margin: 0;
-        width: 100%;
-    }
-}
-
-.n-button {
-    background: transparent;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    cursor: pointer;
-    font: inherit;
-    min-height: var(--target);
-    padding: 0 var(--space-4);
-
-    &:hover {
-        background: var(--surface-raised);
-    }
-}
-
 .n-footer {
     border-top: 1px solid var(--border);
     display: flex;
@@ -332,38 +112,5 @@ body {
 
     &__credit {
         margin-left: auto;
-    }
-}
-
-@media (forced-colors: active) {
-    .n-switch__track,
-    .n-choice__options,
-    .n-button {
-        border-color: CanvasText;
-    }
-
-    .n-switch__thumb {
-        background: CanvasText;
-        forced-color-adjust: none;
-    }
-
-    .n-switch__input:checked + .n-switch__track {
-        background: Highlight;
-        border-color: Highlight;
-        forced-color-adjust: none;
-    }
-
-    .n-switch__input:checked + .n-switch__track .n-switch__thumb {
-        background: HighlightText;
-    }
-
-    .n-choice__input:checked + .n-choice__text {
-        background: Highlight;
-        color: HighlightText;
-        forced-color-adjust: none;
-    }
-
-    .n-switch--disabled .n-switch__track {
-        border-color: GrayText;
     }
 }

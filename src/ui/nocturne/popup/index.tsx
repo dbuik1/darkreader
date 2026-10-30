@@ -9,6 +9,7 @@ import Connector from '../../connect/connector';
 import {fixNotClosingPopupOnNavigation} from '../../popup/utils/issues';
 import {compose} from '../../utils';
 
+import {applyAppearance} from '../appearance';
 import {strings} from '../strings';
 
 import Body from './body';
@@ -28,6 +29,7 @@ async function start() {
     connector.subscribeToChanges((data) => render(data, connector));
 }
 
+applyAppearance();
 document.documentElement.lang = getUILanguage();
 document.title = strings.appName;
 

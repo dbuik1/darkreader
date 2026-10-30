@@ -96,12 +96,13 @@ interface ChoiceProps<T> {
     name: string;
     value: T;
     options: Array<{value: T; label: string}>;
+    vertical?: boolean;
     onChange: (value: T) => void;
 }
 
 export function Choice<T>(props: ChoiceProps<T>) {
     return (
-        <fieldset class="n-choice">
+        <fieldset class={{'n-choice': true, 'n-choice--vertical': Boolean(props.vertical)}}>
             <legend class="n-choice__legend">{props.legend}</legend>
             <div class="n-choice__options">
                 {props.options.map((option) => (
@@ -118,5 +119,102 @@ export function Choice<T>(props: ChoiceProps<T>) {
                 ))}
             </div>
         </fieldset>
+    );
+}
+
+interface TextFieldProps {
+    id: string;
+    label: string;
+    hint?: string | null;
+    error?: string | null;
+    type?: string;
+    value?: string;
+    inputmode?: string;
+    onChange?: (value: string, input: HTMLInputElement) => void;
+    onEnter?: (value: string, input: HTMLInputElement) => void;
+    oncreate?: (input: HTMLInputElement) => void;
+}
+
+export function TextField(props: TextFieldProps) {
+    const hintId = props.hint ? `${props.id}-hint` : null;
+    const errorId = props.error ? `${props.id}-error` : null;
+    const describedBy = [hintId, errorId].filter(Boolean).join(' ') || null;
+    return (
+        <div class="n-field">
+            <label class="n-field__label" for={props.id}>{props.label}</label>
+            {props.hint ? <span class="n-field__hint" id={hintId}>{props.hint}</span> : null}
+            {props.error ? <span class="n-field__error" id={errorId} role="alert">{props.error}</span> : null}
+            <input
+                class="n-field__input"
+                id={props.id}
+                type={props.type || 'text'}
+                inputmode={props.inputmode || null}
+                autocomplete="off"
+                spellcheck="false"
+                aria-describedby={describedBy}
+                aria-invalid={props.error ? 'true' : null}
+                oncreate={(el: HTMLInputElement) => {
+                    if (props.value != null) {
+                        el.value = props.value;
+                    }
+                    props.oncreate?.(el);
+                }}
+                onchange={props.onChange ? (e: Event) => {
+                    const el = e.target as HTMLInputElement;
+                    props.onChange!(el.value, el);
+                } : undefined}
+                onkeydown={props.onEnter ? (e: KeyboardEvent) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const el = e.target as HTMLInputElement;
+                        props.onEnter!(el.value, el);
+                    }
+                } : undefined}
+            />
+        </div>
+    );
+}
+
+interface DialogProps {
+    title: string;
+    body: string;
+    confirmLabel: string;
+    cancelLabel: string;
+    danger?: boolean;
+    onConfirm: () => void;
+    onCancel: () => void;
+}
+
+// showModal() traps focus and puts it on the first button, which is Cancel,
+// so a stray Enter never confirms a destructive action.
+export function Dialog(props: DialogProps) {
+    return (
+        <dialog
+            class="n-dialog"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-body"
+            onrender={(el: HTMLDialogElement) => {
+                if (!el.open) {
+                    el.showModal();
+                }
+            }}
+            oncancel={(e: Event) => {
+                e.preventDefault();
+                props.onCancel();
+            }}
+        >
+            <h2 class="n-dialog__title" id="dialog-title">{props.title}</h2>
+            <p class="n-dialog__body" id="dialog-body">{props.body}</p>
+            <div class="n-dialog__actions">
+                <button class="n-button" type="button" onclick={props.onCancel}>{props.cancelLabel}</button>
+                <button
+                    class={{'n-button': true, 'n-button--danger': Boolean(props.danger), 'n-button--primary': !props.danger}}
+                    type="button"
+                    onclick={props.onConfirm}
+                >
+                    {props.confirmLabel}
+                </button>
+            </div>
+        </dialog>
     );
 }

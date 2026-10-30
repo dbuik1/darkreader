@@ -1,6 +1,6 @@
 // Every text colour clears 7:1 against both --bg and --surface in its theme;
 // borders and the focus ring clear 3:1 against both.
-:root {
+.dark-tokens() {
     color-scheme: dark;
     --bg: #111418;
     --surface: #1b2026;
@@ -14,11 +14,36 @@
     --focus: #ffd166;
     --callout-bg: #2a2412;
     --callout-border: #c9a64b;
+    --error: #ffb4ab;
+    --backdrop: rgb(0 0 0 / 60%);
+}
+
+.light-tokens() {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #f3f5f7;
+    --surface-raised: #e8ecf0;
+    --text: #14181c;
+    --text-muted: #454f5a;
+    --accent: #00566b;
+    --on-accent: #ffffff;
+    --border: #6b7681;
+    --track-off: #6b7681;
+    --focus: #9a4d00;
+    --callout-bg: #fff6dc;
+    --callout-border: #8a6a00;
+    --error: #a1120a;
+    --backdrop: rgb(20 24 28 / 45%);
+}
+
+:root {
+    .dark-tokens();
 
     --font: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
     --text-base: 1rem;
     --text-small: 0.875rem;
     --text-large: 1.25rem;
+    --text-xl: 1.75rem;
     --leading: 1.4;
 
     --space-1: 0.25rem;
@@ -26,6 +51,7 @@
     --space-3: 0.75rem;
     --space-4: 1rem;
     --space-6: 1.5rem;
+    --space-8: 2rem;
 
     --target: 2.75rem;
     --radius: 0.5rem;
@@ -34,21 +60,13 @@
 }
 
 @media (prefers-color-scheme: light) {
-    :root {
-        color-scheme: light;
-        --bg: #ffffff;
-        --surface: #f3f5f7;
-        --surface-raised: #e8ecf0;
-        --text: #14181c;
-        --text-muted: #454f5a;
-        --accent: #00566b;
-        --on-accent: #ffffff;
-        --border: #6b7681;
-        --track-off: #6b7681;
-        --focus: #9a4d00;
-        --callout-bg: #fff6dc;
-        --callout-border: #8a6a00;
+    :root:not([data-theme='dark']) {
+        .light-tokens();
     }
+}
+
+:root[data-theme='light'] {
+    .light-tokens();
 }
 
 @media (prefers-contrast: more) {

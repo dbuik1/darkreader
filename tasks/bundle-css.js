@@ -19,7 +19,7 @@ const cssEntries = [
         dest: 'ui/devtools/style.css',
     },
     {
-        src: 'src/ui/options/style.less',
+        src: 'src/ui/nocturne/options/style.less',
         dest: 'ui/options/style.css',
     },
     {
