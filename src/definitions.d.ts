@@ -116,6 +116,7 @@ export interface UserSettings {
     previewNewDesign: boolean;
     previewNewestDesign: boolean;
     enableForPDF: boolean;
+    openPDFsInViewer: boolean;
     enableForProtectedPages: boolean;
     enableContextMenus: boolean;
     detectDarkTheme: boolean;

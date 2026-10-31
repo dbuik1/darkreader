@@ -181,6 +181,7 @@ export function validateSettings(settings: Partial<UserSettings>): SettingValida
     validateProperty(settings, 'previewNewDesign', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'previewNewestDesign', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableForPDF', isBoolean, DEFAULT_SETTINGS);
+    validateProperty(settings, 'openPDFsInViewer', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableForProtectedPages', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableContextMenus', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'detectDarkTheme', isBoolean, DEFAULT_SETTINGS);

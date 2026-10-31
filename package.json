@@ -107,6 +107,7 @@
     "karma-safari-launcher": "1.0.0",
     "karma-spec-reporter": "0.0.37",
     "less": "4.9.1",
+    "pdfjs-dist": "6.4.299",
     "prettier": "3.9.10",
     "puppeteer-core": "25.16.0",
     "rollup": "4.66.0",

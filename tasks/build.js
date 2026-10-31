@@ -11,6 +11,7 @@ import bundleSignature from './bundle-signature.js';
 import clean from './clean.js';
 import codeStyle from './code-style.js';
 import copy from './copy.js';
+import nocturnePDFViewer from './nocturne-pdf-viewer.js';
 import saveLog from './log.js';
 import {PLATFORM} from './platform.js';
 import * as reload from './reload.js';
@@ -26,6 +27,7 @@ const standardTask = [
     bundleLocales,
     bundleManifest,
     copy,
+    nocturnePDFViewer,
     saveLog,
 ];
 

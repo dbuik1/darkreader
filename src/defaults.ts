@@ -107,6 +107,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
     previewNewDesign: false,
     previewNewestDesign: false,
     enableForPDF: true,
+    openPDFsInViewer: false,
     enableForProtectedPages: false,
     enableContextMenus: false,
     detectDarkTheme: true,

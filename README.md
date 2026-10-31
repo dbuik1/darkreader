@@ -1,5 +1,16 @@
 > [!NOTE]
-> This repository is a fork of [Dark Reader](https://github.com/darkreader/darkreader), created by Alexander Shutau and developed by Dark Reader Ltd. and its contributors. The fork is published as Nocturne and also aims to darken canvas, closed shadow DOM, PDFs and images. Dark Reader's code is used under the MIT License, and its [LICENSE](LICENSE) file is kept unchanged. This fork is not affiliated with or endorsed by Dark Reader Ltd. Everything below this note is Dark Reader's original README.
+> This repository is a fork of [Dark Reader](https://github.com/darkreader/darkreader), created by Alexander Shutau and developed by Dark Reader Ltd. and its contributors. The fork is published as Nocturne and also aims to darken canvas, closed shadow DOM, PDFs and images. Dark Reader's code is used under the MIT License, and its [LICENSE](LICENSE) file is kept unchanged. This fork is not affiliated with or endorsed by Dark Reader Ltd.
+>
+> **What Nocturne adds** (code in `src/inject/nocturne`, `src/background/nocturne`, `src/ui/nocturne/pdf-viewer` and `src/utils/nocturne`; each can be switched off under Settings, Page content):
+>
+> - Canvases: light canvases are sampled and inverted with hue kept; WebGL and cross-origin canvases that can't be read fall back to a size rule.
+> - Closed shadow DOM: closed shadow roots are styled like open ones, using the extension-only `chrome.dom.openOrClosedShadowRoot`.
+> - Images: `<img>` elements are sorted into light graphics (inverted), dark icons (lightened) and photos (dimmed, never inverted).
+> - PDFs (Chromium; off by default, turn on **Open PDFs in Nocturne’s viewer** under Settings, General): PDF tabs open in a viewer built on [pdf.js](https://github.com/mozilla/pdf.js) (Apache-2.0, license shipped in `ui/pdf-viewer/vendor/LICENSE`) that keeps photos in true color.
+>
+> Test pages for each gap are in [tests/gaps](tests/gaps).
+>
+> Everything below this note is Dark Reader's original README.
 
 <p align="center"><a href="https://darkreader.org" target="_blank" rel="noreferrer noopener"><img width="250" alt="Dark Reader's mascot" src="https://raw.githubusercontent.com/darkreader/darkreader.github.io/master/images/darkreader-mascot.svg"></a></p>
 <p align="center">Dark Reader <strong>analyzes</strong> web pages and aims to <strong>reduce eyestrain</strong> while browsing the web.</p>

@@ -1,0 +1,180 @@
+@import '../theme.less';
+@import '../controls.less';
+
+:root {
+    // The viewer only opens while Nocturne is darkening pages, so it stays dark.
+    .dark-tokens();
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.v-bar {
+    align-items: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex: none;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-2) var(--space-4);
+}
+
+// The document title is already in the browser tab, so the toolbar keeps it for screen readers only.
+.v-title {
+    clip-path: inset(50%);
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.v-controls {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+}
+
+.v-group {
+    align-items: center;
+    display: flex;
+    gap: var(--space-2);
+    margin: 0;
+}
+
+.v-muted {
+    color: var(--text-muted);
+    font-size: var(--text-small);
+    white-space: nowrap;
+}
+
+.v-page-input {
+    width: 4.5rem;
+}
+
+.v-find {
+    width: 10rem;
+}
+
+.v-zoom {
+    width: 8rem;
+}
+
+.v-matches:empty {
+    display: none;
+}
+
+.v-icon-button {
+    font-size: var(--text-large);
+    line-height: 1;
+    min-width: var(--target);
+    padding: 0;
+}
+
+.v-link-button {
+    align-items: center;
+    color: var(--accent);
+    display: inline-flex;
+    min-height: var(--target);
+}
+
+.v-status {
+    flex-basis: 100%;
+
+    &:empty {
+        display: none;
+    }
+}
+
+.v-stage {
+    flex: 1;
+    position: relative;
+}
+
+.v-pages {
+    background: var(--bg);
+    inset: 0;
+    overflow: auto;
+    position: absolute;
+
+    // pdf.js draws page borders and shadows for a light page; match the dark page instead.
+    --page-border: none;
+    --page-bg-color: #1a1a1a;
+    --page-margin: var(--space-4) auto;
+
+    .page {
+        box-shadow: 0 0 0 1px var(--surface-raised);
+    }
+}
+
+.v-pages .canvasWrapper > canvas:first-child {
+    filter: invert(0.9) hue-rotate(180deg);
+}
+
+.v-page-images {
+    inset: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.v-message {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: var(--space-8) auto;
+    max-width: 32rem;
+    padding: 0 var(--space-4);
+
+    h2 {
+        font-size: var(--text-large);
+        margin: 0;
+    }
+
+    &__action {
+        align-items: center;
+        align-self: flex-start;
+        display: inline-flex;
+        text-decoration: none;
+    }
+}
+
+#print-pages {
+    display: none;
+}
+
+@media print {
+    @page {
+        margin: 0;
+    }
+
+    html,
+    body {
+        background: #fff;
+        display: block;
+        height: auto;
+        overflow: visible;
+    }
+
+    .v-bar,
+    .v-stage {
+        display: none;
+    }
+
+    #print-pages {
+        display: block;
+
+        img {
+            break-after: page;
+            display: block;
+            width: 100%;
+        }
+    }
+}
