@@ -1,0 +1,116 @@
+@import '../theme.less';
+@import '../controls.less';
+
+body {
+    display: flex;
+    flex-direction: column;
+    width: min(22.5rem, 100vw);
+}
+
+// The generated page ships a static loading message that sync() replaces.
+.loader {
+    display: none;
+}
+
+.n-header {
+    align-items: center;
+    color: var(--accent);
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-4) var(--space-2);
+
+    &__mark {
+        flex: none;
+    }
+
+    &__title {
+        color: var(--text);
+        font-size: var(--text-base);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        margin: 0;
+    }
+}
+
+.n-popup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0 var(--space-4) var(--space-4);
+}
+
+.n-primary {
+    background: var(--surface);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+}
+
+.n-secondary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+
+.n-disclosure {
+    border-top: 1px solid var(--border);
+
+    &__summary {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        min-height: var(--target);
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::after {
+            border-bottom: 2px solid currentColor;
+            border-right: 2px solid currentColor;
+            content: '';
+            height: 0.5rem;
+            margin-right: var(--space-2);
+            transform: translateY(-25%) rotate(45deg);
+            transition: transform var(--duration) var(--ease);
+            width: 0.5rem;
+        }
+    }
+
+    &[open] &__summary::after {
+        transform: translateY(25%) rotate(-135deg);
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        padding: var(--space-2) 0 var(--space-2);
+    }
+}
+
+.n-footer {
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-4);
+    padding: 0 var(--space-4);
+
+    &__link {
+        align-items: center;
+        display: inline-flex;
+        font-size: var(--text-small);
+        justify-content: center;
+        min-height: var(--target);
+        min-width: var(--target);
+    }
+
+    &__credit {
+        margin-left: auto;
+    }
+}

@@ -53,12 +53,12 @@ const jsEntries = [
         reloadType: reload.UI,
     },
     {
-        src: 'src/ui/options/index.tsx',
+        src: 'src/ui/nocturne/options/index.tsx',
         dest: 'ui/options/index.js',
         reloadType: reload.UI,
     },
     {
-        src: 'src/ui/popup/index.tsx',
+        src: 'src/ui/nocturne/popup/index.tsx',
         dest: 'ui/popup/index.js',
         reloadType: reload.UI,
     },
@@ -79,7 +79,7 @@ async function bundleJS(/** @type {JSEntry} */entry, platform, debug, watch, log
     switch (platform) {
         case PLATFORM.FIREFOX_MV2:
         case PLATFORM.THUNDERBIRD:
-            if (entry.src === 'src/ui/popup/index.tsx') {
+            if (entry.src === 'src/ui/nocturne/popup/index.tsx') {
                 break;
             }
             replace = {
