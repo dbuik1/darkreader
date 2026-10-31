@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closed shadow DOM</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav><a href="index.html">All test pages</a></nav>
+<h1>Closed shadow DOM</h1>
+<div class="expect">Expected: both cards turn dark. Today only the open one does.</div>
+<section><h2>Open shadow root</h2><test-card mode="open"></test-card></section>
+<section><h2>Closed shadow root</h2><test-card mode="closed"></test-card></section>
+<section><h2>Closed root added later</h2><div id="late"></div></section>
+<script>
+class TestCard extends HTMLElement {
+  connectedCallback() {
+    const mode = this.getAttribute("mode");
+    const root = this.attachShadow({ mode });
+    root.innerHTML = `
+      <style>
+        .card { background: #ffffff; color: #111827; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; }
+        .meta { color: #4b5563; }
+        button { background: #2563eb; color: #ffffff; border: 0; border-radius: 8px; padding: 8px 14px; }
+      </style>
+      <div class="card">
+        <strong>${mode} root</strong>
+        <p class="meta">White card with dark text in a shadow root (${mode}).</p>
+        <button>Save changes</button>
+      </div>`;
+  }
+}
+customElements.define("test-card", TestCard);
+setTimeout(() => {
+  const el = document.createElement("test-card");
+  el.setAttribute("mode", "closed");
+  document.getElementById("late").append(el);
+}, 2000);
+</script>
+</body></html>

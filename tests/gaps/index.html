@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dark mode test pages</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<h1>Dark mode test pages</h1>
+<p>Each page reproduces one gap in Dark Reader. Open it with the extension on and compare against the expected result at the top of the page.</p>
+<ul>
+  <li><a href="canvas-2d.html">2D canvas</a>: light chart and a dark canvas</li>
+  <li><a href="canvas-webgl.html">WebGL canvas</a>: light scene that can't be sampled</li>
+  <li><a href="shadow-closed.html">Closed shadow DOM</a>: closed and open components side by side</li>
+  <li><a href="images.html">Images</a>: screenshot, diagram, photo, icon</li>
+  <li><a href="images-200.html">200 images</a>: scrolling performance</li>
+  <li><a href="pdf/text.pdf">Text PDF</a>: text, chart and a photo</li>
+  <li><a href="pdf/scanned.pdf">Scanned PDF</a>: one image per page, no text layer</li>
+</ul>
+<p>Serve this folder over HTTP, for example <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000</code>. Opening files directly needs <strong>Allow access to file URLs</strong> on the extension.</p>
+<p>To capture screenshots of each page with a built extension, run <code>CHROME_PATH=&lt;chrome binary&gt; node tests/gaps/capture.js build/debug/chrome-mv3 &lt;output folder&gt;</code> from the repository root.</p>
+</body></html>

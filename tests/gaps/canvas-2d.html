@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2D canvas</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav><a href="index.html">All test pages</a></nav>
+<h1>2D canvas</h1>
+<section>
+  <h2>Light chart</h2>
+  <div class="expect">Expected: dark background, light axis and labels, and the three series still easy to tell apart.</div>
+  <canvas id="light" width="800" height="360"></canvas>
+</section>
+<section>
+  <h2>Dark canvas</h2>
+  <div class="expect">Expected: unchanged. It is already dark.</div>
+  <canvas id="dark" width="800" height="200"></canvas>
+</section>
+<section>
+  <h2>Redrawn chart</h2>
+  <div class="expect">Expected: stays dark as new bars are drawn every second.</div>
+  <canvas id="live" width="800" height="200"></canvas>
+</section>
+<script>
+const series = [["#2563eb", [5, 7, 9, 6]], ["#dc2626", [8, 6, 7, 9]], ["#16a34a", [3, 4, 6, 8]]];
+function chart(ctx, w, h) {
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = "#111827"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(50, h - 40); ctx.lineTo(w - 20, h - 40); ctx.stroke();
+  ctx.font = "16px system-ui"; ctx.fillStyle = "#111827";
+  ["Q1", "Q2", "Q3", "Q4"].forEach((q, i) => ctx.fillText(q, 100 + i * 180, h - 15));
+  series.forEach(([color, vals], s) => vals.forEach((v, i) => {
+    ctx.fillStyle = color; ctx.fillRect(80 + i * 180 + s * 40, h - 40 - v * 28, 32, v * 28);
+  }));
+}
+chart(document.getElementById("light").getContext("2d"), 800, 360);
+
+const dark = document.getElementById("dark").getContext("2d");
+dark.fillStyle = "#0f172a"; dark.fillRect(0, 0, 800, 200);
+dark.fillStyle = "#e2e8f0"; dark.font = "20px system-ui"; dark.fillText("Already dark: leave alone", 30, 110);
+
+const live = document.getElementById("live").getContext("2d");
+let n = 0;
+live.fillStyle = "#ffffff"; live.fillRect(0, 0, 800, 200);
+setInterval(() => {
+  if (n === 0) { live.fillStyle = "#ffffff"; live.fillRect(0, 0, 800, 200); }
+  live.fillStyle = series[n % 3][0];
+  live.fillRect(20 + n * 38, 180 - (n % 5 + 1) * 28, 30, (n % 5 + 1) * 28);
+  n = (n + 1) % 20;
+}, 1000);
+</script>
+</body></html>

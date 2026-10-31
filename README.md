@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository is a fork of [Dark Reader](https://github.com/darkreader/darkreader), created by Alexander Shutau and developed by Dark Reader Ltd. and its contributors. This fork also aims to darken canvas, closed shadow DOM, PDFs and images. Dark Reader's code is used under the MIT License, and its [LICENSE](LICENSE) file is kept unchanged. This fork is not affiliated with or endorsed by Dark Reader Ltd. Everything below this note is Dark Reader's original README.
+
 <p align="center"><a href="https://darkreader.org" target="_blank" rel="noreferrer noopener"><img width="250" alt="Dark Reader's mascot" src="https://raw.githubusercontent.com/darkreader/darkreader.github.io/master/images/darkreader-mascot.svg"></a></p>
 <p align="center">Dark Reader <strong>analyzes</strong> web pages and aims to <strong>reduce eyestrain</strong> while browsing the web.</p>
 <br/>
