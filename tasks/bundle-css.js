@@ -27,6 +27,10 @@ const cssEntries = [
         dest: 'ui/popup/style.css',
     },
     {
+        src: 'src/ui/nocturne/pdf-viewer/style.less',
+        dest: 'ui/pdf-viewer/style.css',
+    },
+    {
         src: 'src/ui/stylesheet-editor/style.less',
         dest: 'ui/stylesheet-editor/style.css',
     },

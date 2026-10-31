@@ -181,6 +181,7 @@ export function validateSettings(settings: Partial<UserSettings>): SettingValida
     validateProperty(settings, 'previewNewDesign', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'previewNewestDesign', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableForPDF', isBoolean, DEFAULT_SETTINGS);
+    validateProperty(settings, 'openPDFsInViewer', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableForProtectedPages', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'enableContextMenus', isBoolean, DEFAULT_SETTINGS);
     validateProperty(settings, 'detectDarkTheme', isBoolean, DEFAULT_SETTINGS);
@@ -219,6 +220,9 @@ export function validateTheme(theme: Partial<Theme> | null | undefined): ThemeVa
     validateProperty(theme, 'lightColorScheme', isNonEmptyString, DEFAULT_THEME);
     validateProperty(theme, 'darkColorScheme', isNonEmptyString, DEFAULT_THEME);
     validateProperty(theme, 'immediateModify', isBoolean, DEFAULT_THEME);
+    validateProperty(theme, 'darkenCanvas', isBoolean, DEFAULT_THEME);
+    validateProperty(theme, 'darkenImages', isBoolean, DEFAULT_THEME);
+    validateProperty(theme, 'styleClosedShadowRoots', isBoolean, DEFAULT_THEME);
 
     return {errors, theme};
 }

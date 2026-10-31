@@ -73,6 +73,9 @@ export interface Theme {
     lightColorScheme: string;
     darkColorScheme: string;
     immediateModify: boolean;
+    darkenCanvas: boolean;
+    darkenImages: boolean;
+    styleClosedShadowRoots: boolean;
 }
 
 export interface CustomSiteConfig {
@@ -113,6 +116,7 @@ export interface UserSettings {
     previewNewDesign: boolean;
     previewNewestDesign: boolean;
     enableForPDF: boolean;
+    openPDFsInViewer: boolean;
     enableForProtectedPages: boolean;
     enableContextMenus: boolean;
     detectDarkTheme: boolean;

@@ -19,13 +19,16 @@ export function prepareCSPMV3(): chrome.runtime.ManifestV3['content_security_pol
     const policy: any = {
         extension_pages: {
             'default-src': [CSP.NONE],
-            'script-src': [CSP.SELF],
+            // The PDF viewer runs pdf.js, which decodes some images with WebAssembly in a worker
+            // and reads local PDFs through file: and blob: URLs.
+            'script-src': [CSP.SELF, "'wasm-unsafe-eval'"],
             'style-src': [CSP.SELF],
             'img-src': [
                 '*',
                 'data:',
+                'blob:',
             ],
-            'connect-src': ['*'],
+            'connect-src': ['*', 'file:', 'blob:'],
             'navigate-to': [
                 CSP.SELF,
                 `${HOMEPAGE_URL}/*`,
@@ -35,7 +38,7 @@ export function prepareCSPMV3(): chrome.runtime.ManifestV3['content_security_pol
             ],
             'media-src': [CSP.NONE],
             'child-src': [CSP.NONE],
-            'worker-src': [CSP.NONE],
+            'worker-src': [CSP.SELF],
             'object-src': [CSP.NONE],
         },
     };
