@@ -2,7 +2,7 @@ import {m} from 'malevic';
 
 import type {ExtensionData, ExtWrapper} from '../../../../definitions';
 import {AutomationMode} from '../../../../utils/automation';
-import {HOMEPAGE_URL} from '../../../../utils/links';
+import {FORK_URL} from '../../../../utils/links';
 import {getLocalMessage} from '../../../../utils/locales';
 import {isChromium} from '../../../../utils/platform';
 import {isLocalFile} from '../../../../utils/url';
@@ -88,8 +88,8 @@ function Header(props: HeaderProps) {
 
     return (
         <header class="header">
-            <a class="header__logo" href={HOMEPAGE_URL} target="_blank" rel="noopener noreferrer">
-                Dark Reader
+            <a class="header__logo" href={FORK_URL} target="_blank" rel="noopener noreferrer">
+                Nocturne
             </a>
             <div class="header__control header__site-toggle">
                 <SiteToggle
