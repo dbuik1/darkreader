@@ -10,6 +10,7 @@ import {
 
 import {startCanvasDarkening, stopCanvasDarkening} from './canvas';
 import {setClosedShadowRootsEnabled} from './closed-shadow-roots';
+import {startImageDarkening, stopImageDarkening} from './images';
 
 export {cleanDynamicThemeCache};
 
@@ -23,9 +24,15 @@ export function createOrUpdateDynamicTheme(theme: Theme, fixes: DynamicThemeFix[
     } else {
         stopCanvasDarkening();
     }
+    if (theme.mode === DARK_MODE && theme.darkenImages !== false) {
+        startImageDarkening();
+    } else {
+        stopImageDarkening();
+    }
 }
 
 export function removeDynamicTheme(): void {
     stopCanvasDarkening();
+    stopImageDarkening();
     removeEngineTheme();
 }

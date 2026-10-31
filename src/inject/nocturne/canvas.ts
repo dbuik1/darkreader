@@ -14,6 +14,8 @@
 
 import {iterateShadowHosts} from '../utils/dom';
 
+import {applyFilter, clearFilter, hasForeignFilter, isFiltered} from './element-filter';
+
 const FILTER = 'invert(0.9) hue-rotate(180deg)';
 const SAMPLE_SIZE = 48;
 const MIN_SIDE = 32;
@@ -26,13 +28,7 @@ const RECHECK_INTERVAL = 1500;
 const SHADOW_RESCAN_INTERVAL = 5000;
 const MAX_SAMPLES_PER_TICK = 24;
 
-interface CanvasState {
-    darkened: boolean;
-    previousFilter: string;
-    previousPriority: string;
-}
-
-const states = new Map<HTMLCanvasElement, CanvasState>();
+const tracked = new Set<HTMLCanvasElement>();
 const shadowCanvases = new Set<HTMLCanvasElement>();
 let running = false;
 let intervalId = 0;
@@ -66,6 +62,8 @@ function measureWhiteShare(canvas: HTMLCanvasElement): number | null {
         ctx.drawImage(canvas, 0, 0, SAMPLE_SIZE, SAMPLE_SIZE);
         data = ctx.getImageData(0, 0, SAMPLE_SIZE, SAMPLE_SIZE).data;
     } catch {
+        // Drawing cross-origin pixels taints the scratch canvas for good, so start a new one.
+        scratch = null;
         return null;
     }
     let white = 0;
@@ -110,39 +108,21 @@ function classify(canvas: HTMLCanvasElement, current: boolean): Verdict {
     return current ? 'light' : 'dark';
 }
 
-function setDarkened(canvas: HTMLCanvasElement, state: CanvasState, darken: boolean) {
-    const style = canvas.style;
-    if (darken) {
-        if (!state.darkened) {
-            state.previousFilter = style.getPropertyValue('filter');
-            state.previousPriority = style.getPropertyPriority('filter');
-        }
-        if (style.getPropertyValue('filter') !== FILTER) {
-            style.setProperty('filter', FILTER, 'important');
-        }
-    } else if (state.darkened) {
-        if (state.previousFilter) {
-            style.setProperty('filter', state.previousFilter, state.previousPriority);
-        } else {
-            style.removeProperty('filter');
-        }
-    }
-    state.darkened = darken;
-}
-
 function check(canvas: HTMLCanvasElement) {
-    if (!canvas.isConnected || canvas.width < MIN_SIDE || canvas.height < MIN_SIDE) {
+    if (!canvas.isConnected || canvas.width < MIN_SIDE || canvas.height < MIN_SIDE || hasForeignFilter(canvas)) {
         return;
     }
-    let state = states.get(canvas);
-    if (!state) {
-        state = {darkened: false, previousFilter: '', previousPriority: ''};
-        states.set(canvas, state);
+    if (!tracked.has(canvas)) {
+        tracked.add(canvas);
         resizeObserver?.observe(canvas);
     }
-    const verdict = classify(canvas, state.darkened);
+    const verdict = classify(canvas, isFiltered(canvas));
     const darken = verdict === 'unreadable' ? isContentSized(canvas) : verdict === 'light';
-    setDarkened(canvas, state, darken);
+    if (darken) {
+        applyFilter(canvas, FILTER);
+    } else {
+        clearFilter(canvas);
+    }
 }
 
 function isVisible(canvas: HTMLCanvasElement) {
@@ -167,7 +147,7 @@ function tick() {
         if (sampled >= MAX_SAMPLES_PER_TICK) {
             return;
         }
-        if (states.has(canvas) && !isVisible(canvas)) {
+        if (tracked.has(canvas) && !isVisible(canvas)) {
             return;
         }
         sampled++;
@@ -175,9 +155,9 @@ function tick() {
     };
     Array.from(document.getElementsByTagName('canvas')).forEach(visit);
     shadowCanvases.forEach(visit);
-    states.forEach((state, canvas) => {
+    tracked.forEach((canvas) => {
         if (!canvas.isConnected) {
-            states.delete(canvas);
+            tracked.delete(canvas);
             resizeObserver?.unobserve(canvas);
         }
     });
@@ -216,7 +196,7 @@ export function stopCanvasDarkening(): void {
     resizeObserver?.disconnect();
     mutationObserver = null;
     resizeObserver = null;
-    states.forEach((state, canvas) => setDarkened(canvas, state, false));
-    states.clear();
+    tracked.forEach(clearFilter);
+    tracked.clear();
     shadowCanvases.clear();
 }
