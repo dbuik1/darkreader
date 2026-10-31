@@ -73,6 +73,9 @@ export interface Theme {
     lightColorScheme: string;
     darkColorScheme: string;
     immediateModify: boolean;
+    darkenCanvas: boolean;
+    darkenImages: boolean;
+    styleClosedShadowRoots: boolean;
 }
 
 export interface CustomSiteConfig {

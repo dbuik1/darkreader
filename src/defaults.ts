@@ -40,6 +40,9 @@ export const DEFAULT_THEME: Theme = {
     lightColorScheme: 'Default',
     darkColorScheme: 'Default',
     immediateModify: false,
+    darkenCanvas: true,
+    darkenImages: true,
+    styleClosedShadowRoots: true,
 };
 
 if (__PLUS__) {

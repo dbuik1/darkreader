@@ -42,6 +42,9 @@ test('Settings Validation', () => {
         lightColorScheme: '',
         darkColorScheme: false,
         immediateModify: 1,
+        darkenCanvas: 'yes',
+        darkenImages: 0,
+        styleClosedShadowRoots: null,
     };
     themeValidation = validateTheme(wonkyTheme as any);
     expect(themeValidation.errors.length).toBeGreaterThan(0);
@@ -77,6 +80,9 @@ test('Settings Validation', () => {
             lightColorScheme: '',
             darkColorScheme: false,
             immediateModify: 1,
+            darkenCanvas: 'yes',
+            darkenImages: 0,
+            styleClosedShadowRoots: null as boolean | null,
         },
         presets: [
             {id: '', name: 'P1', urls: ['a.com'], theme: {brightness: 100}},
@@ -174,6 +180,9 @@ test('Settings Validation', () => {
             lightColorScheme: 'Lightness',
             darkColorScheme: 'Darkness',
             immediateModify: true,
+            darkenCanvas: false,
+            darkenImages: false,
+            styleClosedShadowRoots: false,
         },
         presets: [
             {id: 'p5', name: 'P5', urls: ['a.com'], theme: {brightness: 100} as Theme},

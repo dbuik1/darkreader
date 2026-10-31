@@ -7,7 +7,7 @@ import {activateTheme} from '@plus/utils/theme';
 
 import {writeEnabledForHost} from './cache';
 import {runDarkThemeDetector, stopDarkThemeDetector} from './detector';
-import {createOrUpdateDynamicTheme, removeDynamicTheme, cleanDynamicThemeCache} from './dynamic-theme';
+import {createOrUpdateDynamicTheme, removeDynamicTheme, cleanDynamicThemeCache} from './nocturne/dynamic-theme';
 import {collectCSS} from './dynamic-theme/css-collection';
 import {createOrUpdateStyle, removeStyle} from './style';
 import {createOrUpdateSVGFilter, removeSVGFilter} from './svg-filter';
