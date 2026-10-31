@@ -11,8 +11,8 @@
 
 import {bgFetch} from '../dynamic-theme/network';
 
-import {classifyPixels} from './image-kind';
-import type {Kind} from './image-kind';
+import {classifyPixels} from '../../utils/nocturne/image-kind';
+import type {Kind} from '../../utils/nocturne/image-kind';
 import {applyFilter, clearFilter, hasForeignFilter, isFiltered} from './element-filter';
 
 const FILTERS: Record<Exclude<Kind, 'skip'>, string> = {

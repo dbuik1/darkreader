@@ -1,4 +1,4 @@
-import {classifyPixels} from '../../../src/inject/nocturne/image-kind';
+import {classifyPixels} from '../../../src/utils/nocturne/image-kind';
 
 type RGBA = [number, number, number, number];
 
