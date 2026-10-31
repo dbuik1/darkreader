@@ -12,9 +12,12 @@ import {collectCSS} from './dynamic-theme/css-collection';
 import {createOrUpdateStyle, removeStyle} from './style';
 import {createOrUpdateSVGFilter, removeSVGFilter} from './svg-filter';
 import {logWarn, logInfoCollapsed} from './utils/log';
+import {installNocturneFixes} from './nocturne';
 
 declare const __DEBUG__: boolean;
 declare const __TEST__: boolean;
+
+installNocturneFixes();
 
 let unloaded = false;
 
