@@ -3,7 +3,7 @@ import {getContext} from 'malevic/dom';
 
 import type {ExtWrapper, Theme} from '../../../definitions';
 import {FilterMode} from '../../../generators/css-filter';
-import {GITHUB_URL, getHelpURL} from '../../../utils/links';
+import {GITHUB_URL, NOCTURNE_HELP_URL} from '../../../utils/links';
 import {isChromium} from '../../../utils/platform';
 import {isLocalFile, isPDF} from '../../../utils/url';
 import {toggleExtension} from '../../popup/components/header';
@@ -177,7 +177,7 @@ export default function Body(props: ExtWrapper) {
 
             <footer class="n-footer">
                 <a class="n-footer__link" href="../options/index.html" onclick={openSettings}>{strings.settings}</a>
-                <a class="n-footer__link" href={getHelpURL()} target="_blank" rel="noopener noreferrer">{strings.help}</a>
+                <a class="n-footer__link" href={NOCTURNE_HELP_URL} target="_blank" rel="noopener noreferrer">{strings.help}</a>
                 <a class="n-footer__link n-footer__credit" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">{strings.basedOn}</a>
             </footer>
         </body>

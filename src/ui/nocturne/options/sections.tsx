@@ -3,7 +3,7 @@ import {m} from 'malevic';
 import {DEFAULT_SETTINGS} from '../../../defaults';
 import type {Automation, MessageUItoBG, UserSettings, ViewProps} from '../../../definitions';
 import {AutomationMode} from '../../../utils/automation';
-import {DONATE_URL, FORK_URL, GITHUB_URL, UPSTREAM_LICENSE_URL, getHelpURL} from '../../../utils/links';
+import {DONATE_URL, FORK_URL, GITHUB_URL, UPSTREAM_LICENSE_URL, NOCTURNE_HELP_URL, NOCTURNE_PRIVACY_URL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
 import {MessageTypeUItoBG} from '../../../utils/message';
 import {isEdge, isFirefox, isMatchMediaChangeEventListenerBuggy, isMobile} from '../../../utils/platform';
@@ -558,7 +558,8 @@ export function AboutSection() {
             <ul class="n-links">
                 <li><a href={DONATE_URL} target="_blank" rel="noopener noreferrer">{s.supportDarkReader}</a></li>
                 <li><a href={FORK_URL} target="_blank" rel="noopener noreferrer">{s.sourceCode}</a></li>
-                <li><a href={getHelpURL()} target="_blank" rel="noopener noreferrer">{strings.help}</a></li>
+                <li><a href={NOCTURNE_HELP_URL} target="_blank" rel="noopener noreferrer">{strings.help}</a></li>
+                <li><a href={NOCTURNE_PRIVACY_URL} target="_blank" rel="noopener noreferrer">{s.privacyPolicy}</a></li>
             </ul>
         </div>
     );
