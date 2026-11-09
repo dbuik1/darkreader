@@ -2,6 +2,8 @@
 
 Text to paste into the Chrome Web Store developer dashboard. Images are in this folder.
 
+Don't use the files in `src/_locales/store`: they are Dark Reader's own store listing, kept to make upstream merges easier.
+
 ## Store listing tab
 
 **Name:** Nocturne
