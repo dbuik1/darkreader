@@ -3,30 +3,25 @@ export type Appearance = 'system' | 'dark' | 'light';
 // Stored per browser profile in extension localStorage, shared by the popup and settings pages.
 const KEY = 'nocturne-appearance';
 
+// The interface is dark until the person picks another appearance.
+const DEFAULT_APPEARANCE: Appearance = 'dark';
+
 export function getAppearance(): Appearance {
     try {
         const value = localStorage.getItem(KEY);
-        return value === 'dark' || value === 'light' ? value : 'system';
+        return value === 'dark' || value === 'light' || value === 'system' ? value : DEFAULT_APPEARANCE;
     } catch {
-        return 'system';
+        return DEFAULT_APPEARANCE;
     }
 }
 
 export function applyAppearance(appearance: Appearance = getAppearance()): void {
-    if (appearance === 'system') {
-        delete document.documentElement.dataset.theme;
-    } else {
-        document.documentElement.dataset.theme = appearance;
-    }
+    document.documentElement.dataset.theme = appearance;
 }
 
 export function setAppearance(appearance: Appearance): void {
     try {
-        if (appearance === 'system') {
-            localStorage.removeItem(KEY);
-        } else {
-            localStorage.setItem(KEY, appearance);
-        }
+        localStorage.setItem(KEY, appearance);
     } catch {
         // Without storage the choice still applies until the page closes.
     }

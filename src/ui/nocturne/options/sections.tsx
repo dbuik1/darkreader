@@ -109,9 +109,9 @@ export function GeneralSection(props: SectionProps) {
                 name="appearance"
                 value={getAppearance()}
                 options={[
-                    {value: 'system', label: s.matchSystem},
                     {value: 'dark', label: strings.dark},
                     {value: 'light', label: strings.light},
+                    {value: 'system', label: s.matchSystem},
                 ]}
                 onChange={(appearance) => {
                     setAppearance(appearance);
