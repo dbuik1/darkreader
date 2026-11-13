@@ -137,6 +137,7 @@ export const settingsStrings = {
     version: (version: string) => `Version ${version}`,
     supportDarkReader: 'Support Dark Reader',
     sourceCode: 'Source code',
+    privacyPolicy: 'Privacy policy',
 };
 
 export const pdfViewerStrings = {

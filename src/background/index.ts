@@ -58,7 +58,7 @@ if (__CHROMIUM_MV3__) {
 const welcome = `  /''''\\
  (0)==(0)
 /__||||__\\
-Welcome to Dark Reader!`;
+Welcome to Nocturne!`;
 console.log(welcome);
 
 declare const __DEBUG__: boolean;

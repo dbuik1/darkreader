@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Nocturne",
-    "version": "4.9.134",
+    "version": "1.0.0",
     "author": "dbuik1, based on Dark Reader by Alexander Shutau",
     "description": "__MSG_extension_description__",
     "default_locale": "en",

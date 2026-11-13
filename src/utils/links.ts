@@ -46,4 +46,6 @@ export function getBlogPostURL(postId: string): string {
 }
 
 export const FORK_URL = 'https://github.com/dbuik1/darkreader';
+export const NOCTURNE_HELP_URL = 'https://github.com/dbuik1/darkreader/blob/main/nocturne/HELP.md';
+export const NOCTURNE_PRIVACY_URL = 'https://github.com/dbuik1/darkreader/blob/main/nocturne/PRIVACY.md';
 export const UPSTREAM_LICENSE_URL = 'https://github.com/darkreader/darkreader/blob/main/LICENSE';
