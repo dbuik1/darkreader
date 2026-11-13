@@ -51,8 +51,10 @@ export default class Messenger {
             chrome.runtime.getURL('/ui/options/index.html'),
             chrome.runtime.getURL('/ui/stylesheet-editor/index.html'),
         ];
+        // The settings page keeps the open section in the URL fragment, e.g. index.html#sites.
+        const senderURL = sender.url?.split('#')[0];
         if (
-            allowedSenderURL.includes(sender.url!) || (
+            allowedSenderURL.includes(senderURL!) || (
                 message.type === MessageTypeUItoBG.CHANGE_SETTINGS && (
                     sender.url?.startsWith(`${HOMEPAGE_URL}/activate/`) ||
                     (__PLUS__ && sender.url?.startsWith(`${HOMEPAGE_URL}/plus/activate/`))

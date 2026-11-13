@@ -1,7 +1,7 @@
 import {m} from 'malevic';
 
 import {DEFAULT_SETTINGS} from '../../../defaults';
-import type {Automation, MessageUItoBG, UserSettings, ViewProps} from '../../../definitions';
+import type {Automation, MessageUItoBG, Theme, UserSettings, ViewProps} from '../../../definitions';
 import {AutomationMode} from '../../../utils/automation';
 import {DONATE_URL, FORK_URL, GITHUB_URL, UPSTREAM_LICENSE_URL, getHelpURL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
@@ -80,6 +80,15 @@ export function GeneralSection(props: SectionProps) {
                     onChange={(enableForPDF) => change({enableForPDF})}
                 />
             )}
+            {__CHROMIUM_MV3__ && settings.enableForPDF ? (
+                <Switch
+                    name="pdf-viewer"
+                    label={s.pdfViewer}
+                    hint={s.pdfViewerHint}
+                    checked={settings.openPDFsInViewer}
+                    onChange={(openPDFsInViewer) => change({openPDFsInViewer})}
+                />
+            ) : null}
             {isFirefox ? (
                 <Switch
                     name="browser-theme"
@@ -117,6 +126,39 @@ export function GeneralSection(props: SectionProps) {
                     setAppearance(appearance);
                     props.refresh();
                 }}
+            />
+        </div>
+    );
+}
+
+export function PageContentSection(props: SectionProps) {
+    const {theme} = props.data.settings;
+    const set = (changes: Partial<Theme>) => {
+        props.store.notice = null;
+        props.actions.setTheme(changes);
+    };
+    return (
+        <div class="n-section__body">
+            <Switch
+                name="darken-canvas"
+                label={s.darkenCanvas}
+                hint={s.darkenCanvasHint}
+                checked={theme.darkenCanvas !== false}
+                onChange={(darkenCanvas) => set({darkenCanvas})}
+            />
+            <Switch
+                name="darken-images"
+                label={s.darkenImages}
+                hint={s.darkenImagesHint}
+                checked={theme.darkenImages !== false}
+                onChange={(darkenImages) => set({darkenImages})}
+            />
+            <Switch
+                name="closed-components"
+                label={s.darkenClosedComponents}
+                hint={s.darkenClosedComponentsHint}
+                checked={theme.styleClosedShadowRoots !== false}
+                onChange={(styleClosedShadowRoots) => set({styleClosedShadowRoots})}
             />
         </div>
     );

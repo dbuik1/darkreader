@@ -33,6 +33,7 @@ export function getMockData(override = {} as Partial<ExtensionData>): ExtensionD
             enabledByDefault: true,
             changeBrowserTheme: false,
             enableForPDF: true,
+            openPDFsInViewer: false,
             enableForProtectedPages: false,
             syncSettings: true,
             automation: {

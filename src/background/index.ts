@@ -5,6 +5,7 @@ import {DebugMessageTypeBGtoCS, DebugMessageTypeBGtoUI, DebugMessageTypeCStoBG} 
 import {isFirefox} from '../utils/platform';
 
 import {Extension} from './extension';
+import {startPDFViewerRedirect} from './nocturne/pdf-viewer';
 import {makeChromiumHappy} from './make-chromium-happy';
 import {setNewsForTesting} from './newsmaker';
 import {ASSERT} from './utils/log';
@@ -50,6 +51,9 @@ type TestMessage = {
 
 // Start extension
 const extension = Extension.start();
+if (__CHROMIUM_MV3__) {
+    startPDFViewerRedirect();
+}
 
 const welcome = `  /''''\\
  (0)==(0)

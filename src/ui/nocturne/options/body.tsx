@@ -5,10 +5,11 @@ import type {ViewProps} from '../../../definitions';
 import {settingsStrings as s, strings} from '../strings';
 
 import type {SectionProps, SectionStore} from './sections';
-import {AboutSection, BackupSection, GeneralSection, ScheduleSection, ShortcutsSection, SitesSection} from './sections';
+import {AboutSection, BackupSection, GeneralSection, PageContentSection, ScheduleSection, ShortcutsSection, SitesSection} from './sections';
 
 const sections: Array<{id: string; title: string; view: (props: SectionProps) => Malevic.Child}> = [
     {id: 'general', title: s.general, view: GeneralSection},
+    {id: 'content', title: s.pageContent, view: PageContentSection},
     {id: 'sites', title: s.sites, view: SitesSection},
     {id: 'schedule', title: s.schedule, view: ScheduleSection},
     {id: 'shortcuts', title: s.shortcuts, view: ShortcutsSection},

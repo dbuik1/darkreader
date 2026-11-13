@@ -63,6 +63,12 @@ const jsEntries = [
         reloadType: reload.UI,
     },
     {
+        src: 'src/ui/nocturne/pdf-viewer/index.ts',
+        dest: 'ui/pdf-viewer/index.js',
+        reloadType: reload.UI,
+        platforms: [PLATFORM.CHROMIUM_MV3, PLATFORM.CHROMIUM_MV3_PLUS],
+    },
+    {
         src: 'src/ui/stylesheet-editor/index.tsx',
         dest: 'ui/stylesheet-editor/index.js',
         reloadType: reload.UI,

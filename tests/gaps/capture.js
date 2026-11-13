@@ -52,6 +52,15 @@ page.on('pageerror', (error) => errors.push(error));
 for (const name of PAGES) {
     await page.goto(`http://localhost:${port}/${name}.html`);
     await new Promise((done) => setTimeout(done, 3500));
+    // Images are only analysed near the viewport, so scroll through the page before capturing it.
+    await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 400) {
+            scrollTo(0, y);
+            await new Promise((done) => setTimeout(done, 100));
+        }
+        scrollTo(0, 0);
+    });
+    await new Promise((done) => setTimeout(done, 1000));
     const themed = await page.evaluate(() => Boolean(document.querySelector('.darkreader')));
     await page.screenshot({path: /** @type {`${string}.png`} */ (join(outDir, `${name}.png`)), fullPage: true});
     console.log(`${name}: ${themed ? 'themed' : 'NOT themed'}`);

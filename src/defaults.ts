@@ -40,6 +40,9 @@ export const DEFAULT_THEME: Theme = {
     lightColorScheme: 'Default',
     darkColorScheme: 'Default',
     immediateModify: false,
+    darkenCanvas: true,
+    darkenImages: true,
+    styleClosedShadowRoots: true,
 };
 
 if (__PLUS__) {
@@ -104,6 +107,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
     previewNewDesign: false,
     previewNewestDesign: false,
     enableForPDF: true,
+    openPDFsInViewer: false,
     enableForProtectedPages: false,
     enableContextMenus: false,
     detectDarkTheme: true,
