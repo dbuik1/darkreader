@@ -14,39 +14,59 @@ body {
 }
 
 .v-bar {
-    align-items: center;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    display: flex;
     flex: none;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    padding: var(--space-2) var(--space-4);
+    position: relative;
+    z-index: 3;
+
+    &--waiting [inert] {
+        opacity: 0.5;
+    }
 }
 
-// The document title is already in the browser tab, so the toolbar keeps it for screen readers only.
+.v-bar__row {
+    align-items: center;
+    display: flex;
+    gap: var(--space-2);
+    min-height: 3.25rem;
+    padding: var(--space-1) var(--space-2);
+}
+
+.v-bar__spacer {
+    flex: 1;
+}
+
 .v-title {
+    flex: 0 1 auto;
+    font-size: var(--text-small);
+    font-weight: 600;
+    margin: 0 var(--space-2) 0 0;
+    max-width: 18rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.v-visually-hidden {
     clip-path: inset(50%);
     height: 1px;
-    margin: 0;
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
     width: 1px;
 }
 
-.v-controls {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-3);
-}
-
 .v-group {
     align-items: center;
     display: flex;
+    gap: var(--space-1);
+}
+
+.v-page {
     gap: var(--space-2);
-    margin: 0;
+    padding: 0 var(--space-2);
 }
 
 .v-muted {
@@ -56,37 +76,154 @@ body {
 }
 
 .v-page-input {
-    width: 4.5rem;
-}
-
-.v-find {
-    width: 10rem;
+    min-height: 2.25rem;
+    padding: 0 var(--space-1);
+    text-align: center;
+    width: 3.25rem;
 }
 
 .v-zoom {
-    width: 8rem;
-}
-
-.v-matches:empty {
-    display: none;
+    min-height: 2.25rem;
+    width: 7.5rem;
 }
 
 .v-icon-button {
-    font-size: var(--text-large);
-    line-height: 1;
-    min-width: var(--target);
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    display: inline-flex;
+    flex: none;
+    height: var(--target);
+    justify-content: center;
     padding: 0;
+    width: var(--target);
+
+    &:hover {
+        background: var(--surface-raised);
+    }
+
+    &[aria-expanded='true'] {
+        background: var(--surface-raised);
+        color: var(--accent);
+    }
 }
 
-.v-link-button {
+// Find sits under the bar at the right, like the browser's own find box.
+.v-find {
     align-items: center;
-    color: var(--accent);
-    display: inline-flex;
-    min-height: var(--target);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-1) var(--space-1) var(--space-3);
+    position: absolute;
+    right: var(--space-2);
+    top: calc(100% + var(--space-2));
+
+    &[hidden] {
+        display: none;
+    }
+
+    &__label {
+        color: var(--text-muted);
+        display: flex;
+    }
+
+    &__input {
+        background: transparent;
+        border: 0;
+        color: var(--text);
+        font: inherit;
+        min-height: 2.25rem;
+        width: 12rem;
+
+        &:focus-visible {
+            outline-offset: 4px;
+        }
+    }
+
+    &__matches {
+        min-width: 4.5rem;
+        text-align: right;
+    }
+}
+
+.v-menu-anchor {
+    position: relative;
+}
+
+.v-menu {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    min-width: 16rem;
+    padding: var(--space-1);
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--space-1));
+
+    &[hidden] {
+        display: none;
+    }
+
+    &__item {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-radius: calc(var(--radius) - 2px);
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        font: inherit;
+        gap: var(--space-3);
+        min-height: var(--target);
+        padding: 0 var(--space-3);
+        text-align: left;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            background: var(--bg);
+        }
+
+        &[aria-checked='true'] {
+            color: var(--accent);
+        }
+
+        &[aria-checked='true']::after {
+            content: '✓';
+            margin-left: var(--space-2);
+        }
+    }
+
+    &__label {
+        flex: 1;
+    }
+
+    &__key {
+        color: var(--text-muted);
+        font-family: inherit;
+        font-size: var(--text-small);
+    }
+
+    &__separator {
+        background: var(--border);
+        height: 1px;
+        margin: var(--space-1) var(--space-2);
+        opacity: 0.5;
+    }
 }
 
 .v-status {
-    flex-basis: 100%;
+    padding: 0 var(--space-4) var(--space-2);
 
     &:empty {
         display: none;
@@ -94,8 +231,277 @@ body {
 }
 
 .v-stage {
+    display: flex;
     flex: 1;
+    min-height: 0;
     position: relative;
+}
+
+.v-panel {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    min-height: 0;
+    width: 13.5rem;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.v-tabs {
+    display: flex;
+    flex: none;
+    gap: var(--space-1);
+    padding: var(--space-2);
+}
+
+.v-tab {
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    cursor: pointer;
+    flex: 1;
+    font: inherit;
+    font-size: var(--text-small);
+    min-height: var(--target);
+
+    &[aria-selected='true'] {
+        background: var(--surface-raised);
+        box-shadow: inset 0 -2px 0 var(--accent);
+        color: var(--text);
+    }
+}
+
+.v-pane {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.v-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) var(--space-2) var(--space-4);
+}
+
+.v-thumb {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font: inherit;
+    font-size: var(--text-small);
+    gap: var(--space-1);
+    padding: var(--space-1);
+    width: 100%;
+
+    &__page {
+        background: #1a1a1a;
+        box-shadow: 0 0 0 1px var(--surface-raised);
+        display: block;
+        min-height: 7.5rem;
+        position: relative;
+        width: 6rem;
+
+        canvas:first-child {
+            display: block;
+            filter: invert(0.9) hue-rotate(180deg);
+            width: 100%;
+        }
+
+        .v-page-images {
+            inset: 0;
+            position: absolute;
+        }
+    }
+
+    &:hover &__page {
+        box-shadow: 0 0 0 2px var(--border);
+    }
+
+    &[aria-current='page'] {
+        color: var(--accent);
+    }
+
+    &[aria-current='page'] &__page {
+        box-shadow: 0 0 0 3px var(--accent);
+    }
+}
+
+.v-outline {
+    padding: var(--space-1) var(--space-2) var(--space-4);
+
+    ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ol ol {
+        padding-left: var(--space-4);
+    }
+
+    &__link {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-radius: var(--radius);
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        font: inherit;
+        font-size: var(--text-small);
+        gap: var(--space-2);
+        min-height: 2.5rem;
+        padding: var(--space-1) var(--space-2);
+        text-align: left;
+        text-decoration: none;
+        width: 100%;
+
+        &:hover {
+            background: var(--surface-raised);
+        }
+
+        &[aria-current] {
+            background: var(--surface-raised);
+            color: var(--accent);
+        }
+    }
+
+    &__title {
+        flex: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    &__page {
+        color: var(--text-muted);
+    }
+}
+
+.v-empty {
+    color: var(--text-muted);
+    font-size: var(--text-small);
+    margin: 0;
+    padding: var(--space-3);
+}
+
+.v-pages-host {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.v-scrim {
+    background: var(--backdrop);
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+// Narrow windows: the panel becomes a sheet over the pages.
+@media (max-width: 720px) {
+    .v-panel {
+        border-radius: 1rem 1rem 0 0;
+        border-right: 0;
+        border-top: 1px solid var(--border);
+        bottom: 0;
+        box-shadow: 0 -0.75rem 2rem rgba(0, 0, 0, 0.5);
+        left: 0;
+        max-height: 75%;
+        position: absolute;
+        right: 0;
+        top: auto;
+        width: auto;
+        z-index: 2;
+    }
+
+    .v-title,
+    .v-zoom-group,
+    .v-print-button {
+        display: none;
+    }
+
+    .v-find {
+        left: var(--space-2);
+
+        &__input {
+            flex: 1;
+            width: auto;
+        }
+    }
+}
+
+@media (max-width: 420px) {
+    .v-find__matches {
+        min-width: 0;
+    }
+}
+
+.v-dialog {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    max-width: min(30rem, calc(100vw - 2rem));
+    padding: var(--space-6);
+
+    &::backdrop {
+        background: var(--backdrop);
+    }
+
+    h2 {
+        font-size: var(--text-large);
+        margin: 0 0 var(--space-4);
+    }
+
+    dl {
+        display: grid;
+        gap: var(--space-2) var(--space-4);
+        grid-template-columns: max-content 1fr;
+        margin: 0 0 var(--space-6);
+    }
+
+    dt {
+        color: var(--text-muted);
+    }
+
+    dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
+.v-toast {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    bottom: var(--space-6);
+    color: var(--text);
+    left: 50%;
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    position: fixed;
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 .v-pages {
@@ -109,6 +515,12 @@ body {
     --page-bg-color: #1a1a1a;
     --page-margin: var(--space-4) auto;
 
+    // Find matches in Nocturne's focus amber, the current one stronger.
+    .textLayer .highlight {
+        --highlight-bg-color: rgba(255, 209, 102, 0.3);
+        --highlight-selected-bg-color: rgba(255, 209, 102, 0.65);
+    }
+
     .page {
         box-shadow: 0 0 0 1px var(--surface-raised);
     }
@@ -116,6 +528,41 @@ body {
 
 .v-pages .canvasWrapper > canvas:first-child {
     filter: invert(0.9) hue-rotate(180deg);
+}
+
+// Original colours: the pages as the PDF draws them, and photos need no overlay.
+.v-pages--original {
+    --page-bg-color: #fff;
+
+    .canvasWrapper > canvas:first-child {
+        filter: none;
+    }
+
+    .v-page-images {
+        display: none;
+    }
+}
+
+.v-panel--original .v-thumb__page {
+    background: #fff;
+
+    canvas:first-child {
+        filter: none;
+    }
+
+    .v-page-images {
+        display: none;
+    }
+}
+
+.v-pages--presenting {
+    background: #000;
+
+    --page-margin: 0 auto;
+
+    .page {
+        box-shadow: none;
+    }
 }
 
 .v-page-images {
@@ -164,7 +611,9 @@ body {
     }
 
     .v-bar,
-    .v-stage {
+    .v-stage,
+    .v-toast,
+    .v-dialog {
         display: none;
     }
 

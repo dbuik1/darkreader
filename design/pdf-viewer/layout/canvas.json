@@ -1,0 +1,116 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-17T01:26:13.528Z"
+ },
+ "title": "PDF viewer layouts",
+ "launch": {
+  "view": "canvas"
+ },
+ "pages": [],
+ "boards": {
+  "A-top-bar.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 1400,
+   "h": 700,
+   "title": "A – Top bar and side panel"
+  },
+  "B-floating-dock.dc.html": {
+   "x": 1940,
+   "y": 0,
+   "w": 1400,
+   "h": 700,
+   "title": "B – Floating dock"
+  },
+  "C-left-rail.dc.html": {
+   "x": 0,
+   "y": 940,
+   "w": 1400,
+   "h": 700,
+   "title": "C – Tool rail"
+  },
+  "D-page-scrubber.dc.html": {
+   "x": 1940,
+   "y": 940,
+   "w": 1400,
+   "h": 700,
+   "title": "D – Page scrubber"
+  },
+  "E-one-box.dc.html": {
+   "x": 0,
+   "y": 1880,
+   "w": 1400,
+   "h": 700,
+   "title": "E – One box"
+  },
+  "F-right-panel.dc.html": {
+   "x": 1940,
+   "y": 1880,
+   "w": 1400,
+   "h": 700,
+   "title": "F – Reading panel on the right"
+  }
+ },
+ "order": [
+  "A-top-bar.dc.html",
+  "B-floating-dock.dc.html",
+  "C-left-rail.dc.html",
+  "D-page-scrubber.dc.html",
+  "E-one-box.dc.html",
+  "F-right-panel.dc.html"
+ ],
+ "notes": {
+  "t": {
+   "x": 0,
+   "y": -260,
+   "text": "PDF viewer – layout round",
+   "kind": "title1",
+   "maxW": 2880
+  },
+  "n0": {
+   "x": 1420,
+   "y": 0,
+   "text": "A – Top bar and side panel. Closest to Chrome: one bar across the top, thumbnails or contents in a panel on the left that pushes the pages over. Phone: the panel opens as a sheet.",
+   "w": 400,
+   "fill": "gray"
+  },
+  "n1": {
+   "x": 3360,
+   "y": 0,
+   "text": "B – Floating dock. Pages use the whole window; one pill of controls floats at the bottom and fades while you scroll. Contents open as a card over the pages.",
+   "w": 400,
+   "fill": "gray"
+  },
+  "n2": {
+   "x": 1420,
+   "y": 940,
+   "text": "C – Tool rail. A slim icon rail on the left opens one panel at a time; find lists every match with its sentence. Phone: the rail becomes a bottom tab bar.",
+   "w": 400,
+   "fill": "gray"
+  },
+  "n3": {
+   "x": 3360,
+   "y": 940,
+   "text": "D – Page scrubber. No sidebar: drag the handle on the right edge and a preview shows the page and its section. Zoom floats bottom right.",
+   "w": 400,
+   "fill": "gray"
+  },
+  "n4": {
+   "x": 1420,
+   "y": 1880,
+   "text": "E – One box. A single field finds text, jumps to a page number or a section. A strip of page thumbnails runs along the bottom.",
+   "w": 400,
+   "fill": "gray"
+  },
+  "n5": {
+   "x": 3360,
+   "y": 1880,
+   "text": "F – Reading panel on the right. Find, contents and pages share one panel on the right, open by default on wide screens. Phone: a bottom sheet.",
+   "w": 400,
+   "fill": "gray"
+  }
+ },
+ "designSystems": []
+}
