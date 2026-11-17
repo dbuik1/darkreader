@@ -70,7 +70,8 @@ export default function Body(props: ExtWrapper) {
     const pdf = isPDF(tab.url);
     const blocker = getBlocker(props);
     const {onSiteToggleClick, toggleHasEffect, isSiteEnabled} = getSiteToggleData(props);
-    const siteLabel = pdf ? strings.darkenPDF : blocker ? strings.darkenPage : strings.darkenSite(getHost(tab.url));
+    const host = getHost(tab.url);
+    const siteLabel = pdf ? strings.darkenPDF : blocker || !host ? strings.darkenPage : strings.darkenSite(host);
     const ownDarkTheme = tab.isInDarkList || Boolean(tab.isDarkThemeDetected);
     const theme = data.settings.theme;
 
