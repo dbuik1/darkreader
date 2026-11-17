@@ -1,10 +1,19 @@
 @import '../theme.less';
 @import '../controls.less';
 
+// Chrome sizes a popup to its content, starting from a tiny window, so a width
+// tied to the viewport collapses. Fill the screen only on touch devices, where
+// the popup opens as a full page.
 body {
     display: flex;
     flex-direction: column;
-    width: min(22.5rem, 100vw);
+    width: 22.5rem;
+}
+
+@media (pointer: coarse) {
+    body {
+        width: auto;
+    }
 }
 
 // The generated page ships a static loading message that sync() replaces.
