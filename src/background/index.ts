@@ -52,7 +52,7 @@ type TestMessage = {
 // Start extension
 const extension = Extension.start();
 if (__CHROMIUM_MV3__) {
-    startPDFViewerRedirect();
+    startPDFViewerRedirect(extension);
 }
 
 const welcome = `  /''''\\

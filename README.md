@@ -6,7 +6,7 @@
 > - Canvases: light canvases are sampled and inverted with hue kept; WebGL and cross-origin canvases that can't be read fall back to a size rule.
 > - Closed shadow DOM: closed shadow roots are styled like open ones, using the extension-only `chrome.dom.openOrClosedShadowRoot`.
 > - Images: `<img>` elements are sorted into light graphics (inverted), dark icons (lightened) and photos (dimmed, never inverted).
-> - PDFs (Chromium; off by default, turn on **Open PDFs in Nocturne’s viewer** under Settings, General): PDF tabs open in a viewer built on [pdf.js](https://github.com/mozilla/pdf.js) (Apache-2.0, license shipped in `ui/pdf-viewer/vendor/LICENSE`) that keeps photos in true color.
+> - PDFs (Chromium; on by default, switch off **Open PDFs in Nocturne’s viewer** under Settings, General): PDF tabs open in a viewer built on [pdf.js](https://github.com/mozilla/pdf.js) (Apache-2.0, license shipped in `ui/pdf-viewer/vendor/LICENSE`) that keeps photos in true color.
 >
 > Test pages for each gap are in [tests/gaps](tests/gaps).
 >
