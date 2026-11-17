@@ -13,7 +13,7 @@ Nocturne is a browser extension that shows websites in dark colors. It does not 
 
 - **Settings sync.** "Sync settings across devices" is on by default. Your settings are then saved to the account you are signed in to in your browser, through the browser's own sync. Turn it off under Settings, Backup and reset.
 - **Images and stylesheets.** To work out a page's colors, Nocturne sometimes downloads an image or stylesheet that the page itself uses, from the same site the page loads it from.
-- **PDF files.** If you turn on the dark PDF viewer, Nocturne downloads the PDF you opened from its address so it can display it.
+- **PDF files.** When the dark PDF viewer is on (it is by default), Nocturne downloads the PDF you opened from its address so it can display it.
 - **Site fixes.** "Download site fixes" is off by default. When you turn it on, Nocturne downloads lists of per-site adjustments from Dark Reader's public GitHub repository. No information about you or your browsing is sent with that request beyond what any web request contains.
 
 Nocturne does not run code downloaded from the internet.

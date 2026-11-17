@@ -1,10 +1,12 @@
 // Reopens PDF tabs in Nocturne's viewer when the content script reports that a PDF is about
 // to be darkened and the viewer is switched on in settings.
 
+import {Extension} from '../extension';
 import UserStorage from '../user-storage';
 
 const OPEN_PDF_VIEWER = 'nocturne-cs-bg-open-pdf-viewer';
 const VIEWER_PAGE = 'ui/pdf-viewer/index.html';
+const DEFAULT_ON_MARKER = 'nocturnePDFViewerDefaultOn';
 
 interface OpenPDFViewerMessage {
     type: typeof OPEN_PDF_VIEWER;
@@ -40,7 +42,22 @@ async function onMessage(message: OpenPDFViewerMessage, sender: chrome.runtime.M
     chrome.tabs.update(tabId, {url: getPDFViewerURL(url.href)});
 }
 
-export function startPDFViewerRedirect(): void {
+// The viewer used to be off by default, so a stored "off" usually means the old default rather
+// than a choice. Turn it on once per installation; after that, switching it off sticks.
+async function applyDefaultOnce(extensionReady: Promise<void>) {
+    const stored = await chrome.storage.local.get(DEFAULT_ON_MARKER);
+    if (stored[DEFAULT_ON_MARKER]) {
+        return;
+    }
+    await extensionReady;
+    if (!UserStorage.settings.openPDFsInViewer) {
+        await Extension.changeSettings({openPDFsInViewer: true});
+    }
+    await chrome.storage.local.set({[DEFAULT_ON_MARKER]: true});
+}
+
+export function startPDFViewerRedirect(extensionReady: Promise<void>): void {
+    applyDefaultOnce(extensionReady);
     chrome.runtime.onMessage.addListener((message, sender) => {
         if (isOpenRequest(message)) {
             onMessage(message, sender);
